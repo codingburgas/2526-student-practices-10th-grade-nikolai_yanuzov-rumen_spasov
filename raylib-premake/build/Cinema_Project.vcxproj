@@ -97,6 +97,14 @@
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data-Base-Manager\Data-Base-Manager.vcxproj">
+      <Project>{40ae646d-2f28-47f6-a5af-b176f64df6e9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Design\Design.vcxproj">
+      <Project>{c0e3e48f-ddc4-48e7-b03e-ebaeee88b394}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

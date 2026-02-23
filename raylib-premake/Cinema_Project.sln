@@ -1,7 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cinema_Project", "build\Cinema_Project.vcxproj", "{08C29D6A-F48F-9170-DD23-0297C9906DD5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Design", "Design\Design.vcxproj", "{C0E3E48F-DDC4-48E7-B03E-EBAEEE88B394}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Data-Base-Manager", "Data-Base-Manager\Data-Base-Manager.vcxproj", "{40AE646D-2F28-47F6-A5AF-B176F64DF6E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +19,14 @@ Global
 		{08C29D6A-F48F-9170-DD23-0297C9906DD5}.Debug|x64.Build.0 = Debug|x64
 		{08C29D6A-F48F-9170-DD23-0297C9906DD5}.Release|x64.ActiveCfg = Release|x64
 		{08C29D6A-F48F-9170-DD23-0297C9906DD5}.Release|x64.Build.0 = Release|x64
+		{C0E3E48F-DDC4-48E7-B03E-EBAEEE88B394}.Debug|x64.ActiveCfg = Debug|x64
+		{C0E3E48F-DDC4-48E7-B03E-EBAEEE88B394}.Debug|x64.Build.0 = Debug|x64
+		{C0E3E48F-DDC4-48E7-B03E-EBAEEE88B394}.Release|x64.ActiveCfg = Release|x64
+		{C0E3E48F-DDC4-48E7-B03E-EBAEEE88B394}.Release|x64.Build.0 = Release|x64
+		{40AE646D-2F28-47F6-A5AF-B176F64DF6E9}.Debug|x64.ActiveCfg = Debug|x64
+		{40AE646D-2F28-47F6-A5AF-B176F64DF6E9}.Debug|x64.Build.0 = Debug|x64
+		{40AE646D-2F28-47F6-A5AF-B176F64DF6E9}.Release|x64.ActiveCfg = Release|x64
+		{40AE646D-2F28-47F6-A5AF-B176F64DF6E9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
