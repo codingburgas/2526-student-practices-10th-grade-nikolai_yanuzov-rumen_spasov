@@ -1,9 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QDebug>
+#include <QQuickStyle>
 
 int main(int argc, char *argv[])
 {
+    QQuickStyle::setStyle("Basic");
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;

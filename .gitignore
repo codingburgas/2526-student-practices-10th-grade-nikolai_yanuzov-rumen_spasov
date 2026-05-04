@@ -1,6 +1,12 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
+# Qt Creator temporary files
+*.xAhfqj
+*.autosave
 
+# Qt Design Studio files
+*.qmlproject.qtds
+*.qmlproject
 *~
 *.autosave
 *.a

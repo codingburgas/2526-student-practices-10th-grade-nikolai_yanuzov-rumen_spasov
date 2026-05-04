@@ -1,316 +1,218 @@
+// Main_menu.qml
 import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-Item {
+Page {
     id: main_menu
+    signal navigateTo(string page)
 
-    height: 2000
-    width: 2000
-    Rectangle {
-        id: scrim
+    background: Rectangle {
+        color: "#030619"
+    }
 
-        height: 2000
-        width: 2000
-
+    ScrollView {
+        id: scrollView
+        anchors.fill: parent
         clip: true
-        color: "#182230"
-        opacity: 1
-    }
-    Rectangle {
-        id: header
 
-        height: 166
-        width: 2000
-        color: "#0d1522"
+        // Custom scrollbar
+        ScrollBar.vertical: ScrollBar {
+            policy: ScrollBar.AlwaysOff
+            width: 8
 
-    }
-    Item {
-        id: header_name
+            contentItem: Rectangle {
+                implicitWidth: 8
+                radius: 4
+                color: "#e94560"
+                opacity: 0.6
+            }
 
-        x: 61
-        y: 48
-
-        height: 66
-        width: 204
-
-        Text {
-            id: logo_text
-
-            x: 76
-
-            height: 62
-            width: 127
-
-            color: "#ffffff"
-            font.family: "Inter"
-            font.letterSpacing: -2
-            font.pixelSize: 40
-            font.weight: Font.Bold
-            horizontalAlignment: Text.AlignLeft
-            lineHeight: 48
-            lineHeightMode: Text.FixedHeight
-            text: "Movix"
-            textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
+            background: Rectangle {
+                color: "transparent"
+            }
         }
-        Image {
-            id: logo_image
 
-            y: 4
+        // Main content column
+        ColumnLayout {
+            width: scrollView.width
+            spacing: 0
 
-            source: Qt.resolvedUrl("assets/rectangle_2.png")
-        }
-    }
-    Item {
-        id: login
+            // ===== HEADER =====
+            Rectangle {
+                id: header
+                Layout.fillWidth: true
+                Layout.preferredHeight: 80
+                color: "#0d1522"
+                border.color: "#373f52"
+                border.width: 1
 
-        x: 1670
-        y: 48
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 20
+                    anchors.rightMargin: 20
 
-        height: 70
-        width: 166
+                    // Logo
+                    Row {
+                        spacing: 10
+                        Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 
-        Rectangle {
-            id: login_rec
+                        Rectangle {
+                            width: 30
+                            height: 15
+                            color: "#e94560"
+                            radius: 3
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
 
-            height: 70
-            width: 166
+                        Text {
+                            text: "MOVIX"
+                            color: "white"
+                            font.pixelSize: 24
+                            font.bold: true
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
 
-            border.color: "#595555"
-            border.width: 2
-            color: "#ed2b313d"
-            radius: 19
-        }
-        Image {
-            id: login_logo
+                    // Spacer
+                    Item { Layout.fillWidth: true }
 
-            x: 25
-            y: 14
+                    // Login button
+                    Rectangle {
+                        Layout.preferredWidth: 120
+                        Layout.preferredHeight: 40
+                        radius: 19
+                        color: "#ed2b313d"
+                        border.color: "#373f52"
+                        border.width: 2
 
-            source: Qt.resolvedUrl("assets/rectangle_4.png")
-        }
-        Text {
-            id: login_text
+                        Text {
+                            anchors.centerIn: parent
+                            text: "Login"
+                            color: "white"
+                            font.pixelSize: 16
+                        }
 
-            x: 72
-            y: 20
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: navigateTo("LoginPage.qml")
+                        }
+                    }
+                }
+            }
 
-            height: 36
-            width: 76
+            // ===== WELCOME SECTION =====
+            Column {
+                Layout.fillWidth: true
+                Layout.topMargin: 50
+                Layout.bottomMargin: 40
+                spacing: 10
 
-            color: "#ffffff"
-            font.family: "Inter"
-            font.letterSpacing: -1.50
-            font.pixelSize: 30
-            font.weight: Font.Bold
-            horizontalAlignment: Text.AlignLeft
-            lineHeight: 36
-            lineHeightMode: Text.FixedHeight
-            text: "Login"
-            textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-        }
-    }
-    Item {
-        id: main_menu_text
+                Text {
+                    text: "Welcome to Movix"
+                    color: "white"
+                    font.pixelSize: 42
+                    font.bold: true
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
 
-        x: 481
-        y: 183
+                Text {
+                    text: "Where Stories Come to Life"
+                    color: "#e94560"
+                    font.pixelSize: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
 
-        height: 262
-        width: 1038
+                Text {
+                    text: "Downtown Location • 123 Cinema Street"
+                    color: "#888888"
+                    font.pixelSize: 16
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
 
-        Text {
-            id: location_text
+            // ===== BUTTONS GRID =====
+            GridLayout {
+                id: buttonGrid
+                Layout.fillWidth: true
+                Layout.leftMargin: 100
+                Layout.rightMargin: 40
+                Layout.bottomMargin: 40
 
-            x: 264
-            y: 231
+                // Responsive columns
+                columns: scrollView.width > 1200 ? 3 : (scrollView.width > 700 ? 2 : 1)
 
-            height: 31
-            width: 512
+                // Responsive button size
+                property real btnWidth: {
+                    let cols = columns
+                    let spacing = (cols - 1) * columnSpacing
+                    return Math.min(443, (scrollView.width - 80 - spacing) / cols)
+                }
+                property real btnHeight: btnWidth * 0.6
 
-            color: "#999999"
-            font.family: "Inter"
-            font.pixelSize: 26
-            font.weight: Font.Bold
-            horizontalAlignment: Text.AlignHCenter
-            text: "Downtown Location • 123 Cinema Street"
-            textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-        }
-        Text {
-            id: welcome_text
+                rowSpacing: 30
+                columnSpacing: 30
 
-            height: 103
-            width: 1039
+                Button1 {
+                    mainText: "Now Showing"
+                    secondaryText: "Browse current movies and showtimes"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("CurrentlyShowing.qml")
+                }
 
-            color: "#ffffff"
-            font.family: "Inter"
-            font.pixelSize: 75
-            font.weight: Font.Bold
-            horizontalAlignment: Text.AlignHCenter
-            text: "Welcome to Movix"
-            textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-        }
-        Text {
-            id: moto_text
+                Button1 {
+                    mainText: "Reservations"
+                    secondaryText: "Book and manage your seats"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("Reservations.qml")
+                }
 
-            y: 120
+                Button1 {
+                    mainText: "Cinema Layout"
+                    secondaryText: "View seating arrangement"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("CinemaLayout.qml")
+                }
 
-            height: 78
-            width: 1039
+                Button1 {
+                    mainText: "Food Orders"
+                    secondaryText: "Pre-order snacks and drinks"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("FoodOrders.qml")
+                }
 
-            color: "#ffffff"
-            font.family: "Inter"
-            font.pixelSize: 32
-            font.weight: Font.Light
-            horizontalAlignment: Text.AlignHCenter
-            text: "Where stories come to life. Experience the gold standard of cinema in every frame."
-            textFormat: Text.PlainText
-            verticalAlignment: Text.AlignVCenter
-            wrapMode: Text.Wrap
-        }
-    }
-    Item {
-        id: options
+                Button1 {
+                    mainText: "Showtimes"
+                    secondaryText: "Check today's movie schedule"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("Showtimes.qml")
+                }
 
-        x: 109
-        y: 538
+                Button1 {
+                    mainText: "About Us"
+                    secondaryText: "Learn about our cinema"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("AboutUs.qml")
+                }
+            }
 
-        height: 1039
-        width: 1839
-
-        Rectangle {
-            id: option_1
-
-            x: 624
-            y: 806
-
-            height: 233
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_2
-
-            x: 1271
-            y: 806
-
-            height: 233
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_3
-
-            x: 1283
-
-            height: 317
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_4
-
-            x: 1283
-
-            height: 317
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_5
-
-            x: 636
-
-            height: 317
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_6
-
-            y: 392
-
-            height: 309
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_7
-
-            x: 1271
-            y: 392
-
-            height: 309
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_8
-
-            x: 624
-            y: 392
-
-            height: 309
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
-        }
-        Rectangle {
-            id: option_9
-
-            y: 806
-
-            height: 233
-            width: 556
-
-            border.color: "#fffbfb"
-            border.width: 1
-            color: "#344255"
-            opacity: 0.78
-            radius: 74
+            // ===== FOOTER =====
+            Text {
+                Layout.fillWidth: true
+                Layout.topMargin: 20
+                Layout.bottomMargin: 30
+                horizontalAlignment: Text.AlignHCenter
+                text: "© 2025 Movix Cinema. All rights reserved."
+                color: "#666666"
+                font.pixelSize: 14
+            }
         }
     }
 }
