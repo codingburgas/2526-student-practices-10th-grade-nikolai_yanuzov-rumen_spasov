@@ -10,7 +10,6 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick)
 add_subdirectory(src)
 
 qt_standard_project_setup(REQUIRES 6.10)
-
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.

@@ -2,12 +2,11 @@ add_executable(App
 AppController.cpp
 AppController.hpp
 main.cpp
+../../resorces.qrc
 )
 
 target_link_libraries(App
-    PRIVATE Qt6::Core
-    PRIVATE Qt6::Quick
-
+    PRIVATE Cinema_UI
 )
 
 install(TARGETS App

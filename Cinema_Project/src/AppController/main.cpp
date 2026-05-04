@@ -1,23 +1,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    engine.load(QUrl("qrc:/src/UI/Main.qml"));
 
-    const QUrl url = QUrl::fromLocalFile("../UI/Main.qml");
+    if (engine.rootObjects().isEmpty()) {
+        qDebug() << "Failed to load QML module!";
+        return -1;
+    }
 
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-                         if (!obj && url == objUrl)
-                             QCoreApplication::exit(-1);
-                     }, Qt::QueuedConnection);
-
-    engine.load(url);
-
-    qInfo() << "negga";
-
-    return QCoreApplication::exec();
+    return app.exec();
 }

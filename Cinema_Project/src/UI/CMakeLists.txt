@@ -1,6 +1,9 @@
-qt_add_qml_module(Cinema_UI
-    URI Cinema_UI
-    QML_FILES
-        Main.qml
-    NO_PLUGIN
+qt_add_library(Cinema_UI STATIC
+    Main.qml
+    Main_menu.qml
+)
+
+target_link_libraries(Cinema_UI
+    PUBLIC Qt6::Quick
+    PUBLIC Qt6::Core
 )

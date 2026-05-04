@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/UI/Main.qml</file>
+        <file>src/UI/Main_menu.qml</file>
+        <file>src/UI/assets/rectangle_2.png</file>
+        <file>src/UI/assets/rectangle_4.png</file>
+    </qresource>
+</RCC>
