@@ -1,4 +1,3 @@
-// Main_menu.qml
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -16,7 +15,6 @@ Page {
         anchors.fill: parent
         clip: true
 
-        // Custom scrollbar
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOff
             width: 8
@@ -33,12 +31,10 @@ Page {
             }
         }
 
-        // Main content column
         ColumnLayout {
             width: scrollView.width
             spacing: 0
 
-            // ===== HEADER =====
             Rectangle {
                 id: header
                 Layout.fillWidth: true
@@ -52,7 +48,6 @@ Page {
                     anchors.leftMargin: 20
                     anchors.rightMargin: 20
 
-                    // Logo
                     Row {
                         spacing: 10
                         Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
@@ -74,35 +69,47 @@ Page {
                         }
                     }
 
-                    // Spacer
                     Item { Layout.fillWidth: true }
 
-                    // Login button
-                    Rectangle {
-                        Layout.preferredWidth: 120
-                        Layout.preferredHeight: 40
-                        radius: 19
-                        color: "#ed2b313d"
-                        border.color: "#373f52"
-                        border.width: 2
+                    Button {
+                        id: control
+                        text: "Login"
+                        hoverEnabled: true
 
-                        Text {
-                            anchors.centerIn: parent
-                            text: "Login"
-                            color: "white"
-                            font.pixelSize: 16
+                        background: Rectangle {
+                            implicitWidth: 100
+                            implicitHeight: 40
+                            radius: 30
+                            color: control.pressed ? "#373f52" : (control.hovered ? "#ed2b313d" : "#373f52")
+                            border.color: "#373f52"
+                            border.width: 2
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 500
+                                    easing.type: Easing.OutCubic
+                                }
+                            }
                         }
 
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: navigateTo("LoginPage.qml")
+                        contentItem: Text {
+                            text: control.text
+                            color: control.hovered ? "#e94560" : "white"
+                            font.pixelSize: 16
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 500
+                                    easing.type: Easing.OutCubic
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            // ===== WELCOME SECTION =====
             Column {
                 Layout.fillWidth: true
                 Layout.topMargin: 50
@@ -132,78 +139,6 @@ Page {
                 }
             }
 
-            // ===== BUTTONS GRID =====
-            GridLayout {
-                id: buttonGrid
-                Layout.fillWidth: true
-                Layout.leftMargin: 100
-                Layout.rightMargin: 40
-                Layout.bottomMargin: 40
-
-                // Responsive columns
-                columns: scrollView.width > 1200 ? 3 : (scrollView.width > 700 ? 2 : 1)
-
-                // Responsive button size
-                property real btnWidth: {
-                    let cols = columns
-                    let spacing = (cols - 1) * columnSpacing
-                    return Math.min(443, (scrollView.width - 80 - spacing) / cols)
-                }
-                property real btnHeight: btnWidth * 0.6
-
-                rowSpacing: 30
-                columnSpacing: 30
-
-                Button1 {
-                    mainText: "Now Showing"
-                    secondaryText: "Browse current movies and showtimes"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("CurrentlyShowing.qml")
-                }
-
-                Button1 {
-                    mainText: "Reservations"
-                    secondaryText: "Book and manage your seats"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("Reservations.qml")
-                }
-
-                Button1 {
-                    mainText: "Cinema Layout"
-                    secondaryText: "View seating arrangement"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("CinemaLayout.qml")
-                }
-
-                Button1 {
-                    mainText: "Food Orders"
-                    secondaryText: "Pre-order snacks and drinks"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("FoodOrders.qml")
-                }
-
-                Button1 {
-                    mainText: "Showtimes"
-                    secondaryText: "Check today's movie schedule"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("Showtimes.qml")
-                }
-
-                Button1 {
-                    mainText: "About Us"
-                    secondaryText: "Learn about our cinema"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("AboutUs.qml")
-                }
-            }
-
-            // ===== FOOTER =====
             Text {
                 Layout.fillWidth: true
                 Layout.topMargin: 20
