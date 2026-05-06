@@ -2,7 +2,8 @@ qt_add_library(Cinema_UI STATIC
     Main.qml
     Main_menu.qml
     Button1.qml
-    Scrim.qml
+    Login_page.qml
+    Header.qml
 )
 
 target_compile_definitions(Cinema_UI PRIVATE

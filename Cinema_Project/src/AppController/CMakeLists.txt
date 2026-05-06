@@ -2,7 +2,7 @@ add_executable(App
 AppController.cpp
 AppController.hpp
 main.cpp
-../../resorces.qrc
+../../resources.qrc
 )
 
 target_link_libraries(App

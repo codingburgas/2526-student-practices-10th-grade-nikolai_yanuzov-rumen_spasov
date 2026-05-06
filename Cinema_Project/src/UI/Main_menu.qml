@@ -16,7 +16,7 @@ Page {
         clip: true
 
         ScrollBar.vertical: ScrollBar {
-            policy: ScrollBar.AlwaysOff
+            policy: ScrollBar.AsNeeded
             width: 8
 
             contentItem: Rectangle {
@@ -35,85 +35,56 @@ Page {
             width: scrollView.width
             spacing: 0
 
-            Rectangle {
-                id: header
-                Layout.fillWidth: true
-                Layout.preferredHeight: 80
-                color: "#0d1522"
-                border.color: "#373f52"
-                border.width: 1
+            Header {            //login button
+                Button {
+                    anchors.right: parent.right
+                    anchors.rightMargin: 40
+                    anchors.verticalCenter: parent.verticalCenter  // Align with header center
+                    id: login_button
+                    text: "Login"
+                    hoverEnabled: true
 
-                RowLayout {
-                    anchors.fill: parent
-                    anchors.leftMargin: 20
-                    anchors.rightMargin: 20
+                    background: Rectangle {
+                        implicitWidth: 100
+                        implicitHeight: 40
+                        radius: 30
+                        color: login_button.pressed ? "#373f52" : login_button.hovered ? "#ed2b313d" : "#373f52"
+                        border.color: "#373f52"
+                        border.width: 2
 
-                    Row {
-                        spacing: 10
-                        Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-
-                        Rectangle {
-                            width: 30
-                            height: 15
-                            color: "#e94560"
-                            radius: 3
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-
-                        Text {
-                            text: "MOVIX"
-                            color: "white"
-                            font.pixelSize: 24
-                            font.bold: true
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                    }
-
-                    Item { Layout.fillWidth: true }
-
-                    Button {
-                        id: control
-                        text: "Login"
-                        hoverEnabled: true
-
-                        background: Rectangle {
-                            implicitWidth: 100
-                            implicitHeight: 40
-                            radius: 30
-                            color: control.pressed ? "#373f52" : (control.hovered ? "#ed2b313d" : "#373f52")
-                            border.color: "#373f52"
-                            border.width: 2
-
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: 500
-                                    easing.type: Easing.OutCubic
-                                }
-                            }
-                        }
-
-                        contentItem: Text {
-                            text: control.text
-                            color: control.hovered ? "#e94560" : "white"
-                            font.pixelSize: 16
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: 500
-                                    easing.type: Easing.OutCubic
-                                }
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 500
+                                easing.type: Easing.OutCubic
                             }
                         }
                     }
+                    //custom button text
+                    contentItem: Text {
+                        text: login_button.text
+                        color: login_button.hovered ? "#e94560" : "white"
+                        font.pixelSize: 16
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 500
+                                easing.type: Easing.OutCubic
+                            }
+                        }
+                    }
+
+                    onClicked: navigateTo("Login_page.qml")
                 }
             }
+
 
             Column {
                 Layout.fillWidth: true
                 Layout.topMargin: 50
                 Layout.bottomMargin: 40
+                Layout.alignment: Qt.AlignHCenter  // ← Center the column itself
                 spacing: 10
 
                 Text {
@@ -139,7 +110,89 @@ Page {
                 }
             }
 
+            // Buttons Grid - CENTERED
+            GridLayout {
+                id: buttonGrid
+                Layout.alignment: Qt.AlignHCenter  // ← Center the grid
+                Layout.topMargin: 20
+                Layout.bottomMargin: 40
+
+                columns: {
+                    if (scrollView.width > 1400)
+                        return 3;
+                    if (scrollView.width > 900)
+                        return 2;
+                    return 1;
+                }
+
+                property real btnWidth: {
+                    let cols = columns;
+                    let maxWidth = scrollView.width * 0.85;
+                    let spacingTotal = (cols - 1) * columnSpacing;
+                    let availableWidth = maxWidth - spacingTotal;
+                    return Math.min(443, availableWidth / cols);
+                }
+                property real btnHeight: btnWidth * 0.6
+
+                rowSpacing: 30
+                columnSpacing: 30
+
+                // Fix margins - same on both sides
+                Layout.leftMargin: 0
+                Layout.rightMargin: 0
+
+                Button1 {
+                    mainText: "Now Showing"
+                    secondaryText: "Browse current movies and showtimes"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("CurrentlyShowing.qml")
+                }
+
+                Button1 {
+                    mainText: "Reservations"
+                    secondaryText: "Book and manage your seats"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("Reservations.qml")
+                }
+
+                Button1 {
+                    mainText: "Cinema Layout"
+                    secondaryText: "View seating arrangement"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("CinemaLayout.qml")
+                }
+
+                Button1 {
+                    mainText: "Food Orders"
+                    secondaryText: "Pre-order snacks and drinks"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("FoodOrders.qml")
+                }
+
+                Button1 {
+                    mainText: "Showtimes"
+                    secondaryText: "Check today's movie schedule"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("Showtimes.qml")
+                }
+
+                Button1 {
+                    mainText: "About Us"
+                    secondaryText: "Learn about our cinema"
+                    Layout.preferredWidth: buttonGrid.btnWidth
+                    Layout.preferredHeight: buttonGrid.btnHeight
+                    onClicked: navigateTo("AboutUs.qml")
+                }
+            }
+
+            // Footer - CENTERED
             Text {
+                Layout.alignment: Qt.AlignHCenter  // ← Center the footer
                 Layout.fillWidth: true
                 Layout.topMargin: 20
                 Layout.bottomMargin: 30
