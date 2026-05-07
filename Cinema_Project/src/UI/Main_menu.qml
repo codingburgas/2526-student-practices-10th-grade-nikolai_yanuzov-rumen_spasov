@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-
+import "pages"
 Page {
     id: main_menu
     signal navigateTo(string page)
@@ -75,7 +75,7 @@ Page {
                         }
                     }
 
-                    onClicked: navigateTo("Login_page.qml")
+                    onClicked: navigateTo("pages/Login_page.qml")
                 }
             }
 

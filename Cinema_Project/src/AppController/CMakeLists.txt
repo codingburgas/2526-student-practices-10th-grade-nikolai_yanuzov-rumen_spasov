@@ -8,6 +8,7 @@ main.cpp
 target_link_libraries(App
     PRIVATE Cinema_UI
     PRIVATE Qt6::QuickControls2
+    PRIVATE Auth_System
 )
 
 install(TARGETS App
