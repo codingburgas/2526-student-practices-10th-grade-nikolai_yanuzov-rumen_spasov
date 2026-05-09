@@ -75,7 +75,7 @@ Page {
                         }
                     }
 
-                    onClicked: navigateTo("pages/Login_page.qml")
+                    onClicked: navigateTo("pages/Authentication_page.qml")
                 }
             }
 

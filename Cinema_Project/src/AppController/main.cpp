@@ -3,8 +3,8 @@
 #include <QDebug>
 #include <QQuickStyle>
 #include <QQmlContext>
-#include "../Core/auth/login.hpp"
-
+#include "AppController.hpp"
+#include <QFileInfo>
 
 int main(int argc, char *argv[])
 {
@@ -12,9 +12,23 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    Loger loger(&app);
-    engine.rootContext()->setContextProperty("loger", &loger);
+    AppController con(&engine, &app);
+    qDebug() << con.authCon->registeringCon;
+    engine.rootContext()->setContextProperty("auth", con.authCon);
 
+    // ADD THIS - Check if QRC file exists
+    QFileInfo qrcFile(":/src/UI/Main.qml");
+    qDebug() << "QRC file exists:" << qrcFile.exists();
+
+    // ADD THIS - Check import paths
+    qDebug() << "Import paths:" << engine.importPathList();
+
+    // Connect to warnings/errors
+    QObject::connect(&engine, &QQmlApplicationEngine::warnings,
+                     [](const QList<QQmlError> &warnings) {
+                         for (const auto &warning : warnings)
+                             qDebug() << "QML Warning:" << warning.toString();
+                     });
 
     engine.load(QUrl("qrc:/src/UI/Main.qml"));
 

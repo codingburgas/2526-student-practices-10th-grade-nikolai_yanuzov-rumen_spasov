@@ -1,0 +1,19 @@
+#include "authcontroller.h"
+
+
+
+AuthController::AuthController(QObject* parent):QObject(parent){
+    loginCon = new LogerController(this);
+    registeringCon = new RegisterController(this);
+}
+
+
+void AuthController::login(const QString &email, const QString &password)
+{
+    loginCon->validate(email, password);
+}
+
+void AuthController::registerUser(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm)
+{
+    registeringCon->validate(username, email, password, passwordConfirm);
+}

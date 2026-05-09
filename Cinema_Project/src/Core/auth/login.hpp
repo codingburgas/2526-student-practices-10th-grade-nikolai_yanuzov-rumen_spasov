@@ -1,25 +1,28 @@
-#ifndef LOGER_H
-#define LOGER_H
+#ifndef LOGERCONTROLLER_H
+#define LOGERCONTROLLER_H
 
-
-#include <QString>
 #include <QObject>
+#include <QString>
 #include <QDebug>
-class Loger : public QObject{
+#include <QMap>
+
+class LogerController : public QObject
+{
     Q_OBJECT
 
 public:
-    explicit Loger(QObject *parent = nullptr) : QObject(parent) {}
+    explicit LogerController(QObject *parent = nullptr);
 
-    Q_INVOKABLE void onSubmitPressed(const QString &email, const QString &password);
-
-private:
-    bool PropperPass(QString& pass);
+    void validate(const QString &email, const QString &password);
 
 signals:
-    void loginError(QString error);
     void loginSuccess();
-};
+    void loginError(QString emailError, QString passError);
 
+private:
+    bool properPass(const QString &pass);
+
+    QMap<QString, QString> loginStorage;
+};
 
 #endif

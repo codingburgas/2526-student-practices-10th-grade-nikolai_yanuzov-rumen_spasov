@@ -6,6 +6,6 @@
         <file>src/UI/assets/MovixLogo.png</file>
         <file>src/UI/assets/rectangle_4.png</file>
         <file>src/UI/Header.qml</file>
-        <file>src/UI/pages/Login_page.qml</file>
+        <file>src/UI/pages/Authentication_page.qml</file>
     </qresource>
 </RCC>
