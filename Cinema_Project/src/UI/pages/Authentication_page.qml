@@ -6,19 +6,6 @@ import "../"
 Page {
 
     id: page
-    Component.onCompleted: {          // ← PASTE HERE
-        console.log("=== QML Debug ===")
-        console.log("auth exists:", typeof auth !== 'undefined')
-        console.log("auth:", auth)
-
-        if (auth) {
-            console.log("auth keys:", Object.keys(auth))
-            console.log("auth.objectName:", auth.objectName)
-            console.log("auth.loginCon:", auth.loginCon)
-            console.log("auth['loginCon']:", auth["loginCon"])
-            console.log("typeof auth.loginCon:", typeof auth.loginCon)
-        }
-    }
     signal navigateTo(string page)
     signal toggleForm()
     property bool pageToggle: true
@@ -125,19 +112,18 @@ Page {
         anchors.centerIn: parent
 
         ScrollView {
+            id: loginScrollView
             anchors.fill: parent
             clip: true
 
-            Item {
-                width: parent.width
-                height: loginColumn.implicitHeight
+
+            contentWidth: availableWidth
 
                 ColumnLayout {
                     id: loginColumn
 
-                    width: login.width * 0.9
+                    width: Math.min(loginScrollView.availableWidth * 0.9, 500)
 
-                    anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     spacing: 25
@@ -441,7 +427,6 @@ Page {
                 }
             }
         }
-    }
     Rectangle {
         id: registerForm
 
@@ -511,9 +496,7 @@ Page {
             anchors.fill: parent
             clip: true
 
-            Item {
-                width: parent.width
-                height: registerColumn.implicitHeight
+            contentWidth: availableWidth
 
                 ColumnLayout {
                     id: registerColumn
@@ -929,4 +912,3 @@ Page {
             }
         }
     }
-        }

@@ -13,15 +13,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     AppController con(&engine, &app);
-    qDebug() << con.authCon->registeringCon;
     engine.rootContext()->setContextProperty("auth", con.authCon);
-
-    // ADD THIS - Check if QRC file exists
-    QFileInfo qrcFile(":/src/UI/Main.qml");
-    qDebug() << "QRC file exists:" << qrcFile.exists();
-
-    // ADD THIS - Check import paths
-    qDebug() << "Import paths:" << engine.importPathList();
 
     // Connect to warnings/errors
     QObject::connect(&engine, &QQmlApplicationEngine::warnings,
