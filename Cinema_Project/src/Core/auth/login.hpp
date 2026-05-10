@@ -14,7 +14,7 @@ class LogerController : public QObject
 public:
     explicit LogerController(QObject *parent = nullptr);
 
-    void validate(const QString &email, const QString &password);
+    void validate(const QString &user, const QString &password);
 
 signals:
     void loginSuccess();

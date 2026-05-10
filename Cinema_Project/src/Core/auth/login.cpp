@@ -8,21 +8,21 @@ LogerController::LogerController(QObject *parent):QObject(parent)
 
 }
 
-void LogerController::validate(const QString &email, const QString &password) {
+void LogerController::validate(const QString &user, const QString &password) {
     qDebug() << "Submit pressed!";
-    qDebug() << "Email:" << email;
+    qDebug() << "Email:" << user;
     qDebug() << "Password:" << password;
 
     // ===== BASIC VALIDATION =====
-    if (email.isEmpty() || password.isEmpty()) {
+    if (user.isEmpty() || password.isEmpty()) {
         emit loginError("Fields cannot be empty", "");
         return;
     }
 
     // ===== DATABASE CHECK =====
     QSqlQuery query;
-    query.prepare("SELECT userPassword FROM Users WHERE userEmail = :email");
-    query.bindValue(":email", email);
+    query.prepare("SELECT userPassword FROM Users WHERE userEmail = :user OR userName = :user");
+    query.bindValue(":user", user);
 
     if (!query.exec()) {
         qDebug() << "Query failed:" << query.lastError();
@@ -30,9 +30,9 @@ void LogerController::validate(const QString &email, const QString &password) {
         return;
     }
 
-    // ===== EMAIL NOT FOUND =====
+    // ===== user NOT FOUND =====
     if (!query.next()) {
-        emit loginError("No such email", "");
+        emit loginError("No such user", "");
         return;
     }
 

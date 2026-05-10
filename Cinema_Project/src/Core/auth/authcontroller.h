@@ -21,6 +21,7 @@ public:
     LogerController* loginCon;
     RegisterController* registeringCon;
 private:
+    void LoadSql();
     QSqlDatabase db;
 };
 

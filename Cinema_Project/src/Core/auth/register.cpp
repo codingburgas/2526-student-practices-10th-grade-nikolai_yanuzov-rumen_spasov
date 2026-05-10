@@ -2,7 +2,6 @@
 
 
 RegisterController::RegisterController(QObject *parent) : QObject(parent) {
-    LoadSql();
 }
 
 void RegisterController::validate(const QString& username,
@@ -110,20 +109,3 @@ void RegisterController::validate(const QString& username,
     qDebug() << "User registered successfully";
 }
 
-void RegisterController::LoadSql(){
-    QFile file(":/sql/sql_assets/users.sql");
-
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Cannot open SQL file:" << file.errorString();
-        return;
-    }
-
-    QString sql = file.readAll();
-    file.close();
-
-    // Use a temporary query for table creation
-    QSqlQuery createQuery;
-    if (!createQuery.exec(sql)) {
-        qDebug() << "CREATE TABLE error:" << createQuery.lastError().text();
-    }
-}
