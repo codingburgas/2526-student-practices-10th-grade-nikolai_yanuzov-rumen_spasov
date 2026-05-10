@@ -4,7 +4,25 @@ import QtQuick.Controls
 import "../"
 
 Page {
-
+    Keys.onPressed: function(event){
+        if(event.key === Qt.Key_Return){
+            console.log("keyPressed")
+            if(pageToggle){
+                auth.login(
+                    login.email,
+                    login.password
+                )
+            }
+            else{
+                auth.registerUser(
+                    registerForm.username,
+                    registerForm.email,
+                    registerForm.password,
+                    registerForm.confirmPassword
+                )
+            }
+        }
+    }
     id: page
     signal navigateTo(string page)
     signal toggleForm()
@@ -53,7 +71,6 @@ Page {
 
     Rectangle {
         id: login
-
 
         property string email: ""
         property string password: ""
