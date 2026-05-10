@@ -1,8 +1,13 @@
 #include "authcontroller.h"
-
+#include <QDir>
 
 
 AuthController::AuthController(QObject* parent):QObject(parent){
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("cinema.db");
+    if (!db.open()) {
+        qDebug() << db.lastError();
+    }
     loginCon = new LogerController(this);
     registeringCon = new RegisterController(this);
 }

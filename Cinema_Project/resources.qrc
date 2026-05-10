@@ -8,4 +8,7 @@
         <file>src/UI/Header.qml</file>
         <file>src/UI/pages/Authentication_page.qml</file>
     </qresource>
+    <qresource prefix="/sql">
+        <file>sql_assets/users.sql</file>
+    </qresource>
 </RCC>

@@ -10,5 +10,5 @@ add_library(Auth_System
 target_link_libraries(Auth_System
     PRIVATE Qt::Core
     PRIVATE Qt::Quick
-
+    PUBLIC Qt6::Sql
 )

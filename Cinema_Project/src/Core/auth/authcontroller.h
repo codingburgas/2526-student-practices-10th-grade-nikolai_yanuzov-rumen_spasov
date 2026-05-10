@@ -4,6 +4,7 @@
 #include <QObject>
 #include "register.hpp"
 #include "login.hpp"
+#include <QSqlDatabase>
 
 class AuthController : public QObject
 {
@@ -19,6 +20,8 @@ public:
 
     LogerController* loginCon;
     RegisterController* registeringCon;
+private:
+    QSqlDatabase db;
 };
 
 #endif // AUTHCONTROLLER_H
