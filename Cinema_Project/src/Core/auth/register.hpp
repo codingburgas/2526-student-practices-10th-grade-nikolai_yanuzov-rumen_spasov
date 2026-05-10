@@ -20,7 +20,6 @@ public:
     void validate(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm);
 private:
     void LoadSql();
-
 signals:
     void registerError(QString usernameError, QString emailError, QString passError);
     void registerSuccess();

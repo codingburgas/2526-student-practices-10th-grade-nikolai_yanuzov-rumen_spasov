@@ -5,7 +5,8 @@
 #include <QString>
 #include <QDebug>
 #include <QMap>
-
+#include <QSqlQuery>
+#include <QSqlError>
 class LogerController : public QObject
 {
     Q_OBJECT

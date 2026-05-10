@@ -8,8 +8,8 @@ AuthController::AuthController(QObject* parent):QObject(parent){
     if (!db.open()) {
         qDebug() << db.lastError();
     }
-    loginCon = new LogerController(this);
     registeringCon = new RegisterController(this);
+    loginCon = new LogerController(this);
 }
 
 
