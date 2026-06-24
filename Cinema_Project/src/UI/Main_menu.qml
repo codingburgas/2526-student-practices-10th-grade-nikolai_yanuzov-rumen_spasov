@@ -178,7 +178,7 @@ Page {
                     secondaryText: "Check today's movie schedule"
                     Layout.preferredWidth: buttonGrid.btnWidth
                     Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("Showtimes.qml")
+                    onClicked: navigateTo("pages/Showtimes_page.qml")
                 }
 
                 Button1 {

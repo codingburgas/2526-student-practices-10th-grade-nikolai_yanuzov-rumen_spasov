@@ -8,6 +8,7 @@
         <file>src/UI/Header.qml</file>
         <file>src/UI/pages/Authentication_page.qml</file>
         <file>src/UI/pages/About_Us_page.qml</file>
+        <file>src/UI/pages/Showtimes_page.qml</file>
     </qresource>
     <qresource prefix="/sql">
         <file>sql_assets/users.sql</file>
