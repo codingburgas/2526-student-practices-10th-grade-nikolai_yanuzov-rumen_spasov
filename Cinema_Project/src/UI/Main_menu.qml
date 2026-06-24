@@ -186,7 +186,7 @@ Page {
                     secondaryText: "Learn about our cinema"
                     Layout.preferredWidth: buttonGrid.btnWidth
                     Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("AboutUs.qml")
+                    onClicked: navigateTo("pages/About_Us_page.qml")
                 }
             }
 
