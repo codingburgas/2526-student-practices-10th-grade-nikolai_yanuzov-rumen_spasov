@@ -170,7 +170,7 @@ Page {
                     secondaryText: "Pre-order snacks and drinks"
                     Layout.preferredWidth: buttonGrid.btnWidth
                     Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("FoodOrders.qml")
+                    onClicked: navigateTo("pages/Food_Orders_page.qml")
                 }
 
                 Button1 {
