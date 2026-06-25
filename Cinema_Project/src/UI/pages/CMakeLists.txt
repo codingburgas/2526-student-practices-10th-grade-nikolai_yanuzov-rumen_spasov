@@ -13,6 +13,9 @@ qt_add_library(Showtimes_UI STATIC
 qt_add_library(Cinema_layout_UI STATIC
     Cinema_layout_page.qml
 )
+qt_add_library(Reservation_UI STATIC
+    Reservation.qml
+)
 qt_add_library(Food_Orders_UI STATIC
     Food_Orders_page.qml
 )

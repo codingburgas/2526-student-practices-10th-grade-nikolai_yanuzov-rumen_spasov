@@ -147,7 +147,7 @@ Page {
                     secondaryText: "Book and manage your seats"
                     Layout.preferredWidth: buttonGrid.btnWidth
                     Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("Reservations.qml")
+                    onClicked: navigateTo("pages/Reservation.qml")
                 }
 
                 Button1 {

@@ -17,6 +17,7 @@
         <file>src/UI/pages/Hall4.qml</file>
         <file>src/UI/pages/Delete.qml</file>
         <file>src/UI/pages/AddNew.qml</file>
+        <file>src/UI/pages/Reservation.qml</file>
     </qresource>
     <qresource prefix="/sql">
         <file>sql_assets/users.sql</file>

@@ -81,7 +81,7 @@ Page {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
-                onClicked: stackView.push("RemoveFilm.qml")
+                onClicked: stackView.push("Delete.qml")
             }
         }
 
