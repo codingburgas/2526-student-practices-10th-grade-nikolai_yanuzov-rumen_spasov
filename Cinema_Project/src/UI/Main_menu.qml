@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import "pages"
+
 Page {
     id: main_menu
     signal navigateTo(string page)
@@ -35,11 +36,11 @@ Page {
             width: scrollView.width
             spacing: 0
 
-            Header {            //login button
+            Header {
                 Button {
                     anchors.right: parent.right
                     anchors.rightMargin: 40
-                    anchors.verticalCenter: parent.verticalCenter  // Align with header center
+                    anchors.verticalCenter: parent.verticalCenter
                     id: login_button
                     text: "Login"
                     hoverEnabled: true
@@ -59,7 +60,7 @@ Page {
                             }
                         }
                     }
-                    //custom button text
+
                     contentItem: Text {
                         text: login_button.text
                         color: login_button.hovered ? "#e94560" : "white"
@@ -79,12 +80,11 @@ Page {
                 }
             }
 
-
             Column {
                 Layout.fillWidth: true
                 Layout.topMargin: 50
                 Layout.bottomMargin: 40
-                Layout.alignment: Qt.AlignHCenter  // ← Center the column itself
+                Layout.alignment: Qt.AlignHCenter
                 spacing: 10
 
                 Text {
@@ -110,16 +110,16 @@ Page {
                 }
             }
 
-            // Buttons Grid - CENTERED
+            // ---- CENTERED BUTTON GRID (5 buttons) ----
             GridLayout {
                 id: buttonGrid
-                Layout.alignment: Qt.AlignHCenter  // ← Center the grid
+                Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 20
                 Layout.bottomMargin: 40
 
                 columns: {
                     if (scrollView.width > 1400)
-                        return 3;
+                        return 2;
                     if (scrollView.width > 900)
                         return 2;
                     return 1;
@@ -137,17 +137,10 @@ Page {
                 rowSpacing: 30
                 columnSpacing: 30
 
-                // Fix margins - same on both sides
                 Layout.leftMargin: 0
                 Layout.rightMargin: 0
 
-                Button1 {
-                    mainText: "Now Showing"
-                    secondaryText: "Browse current movies and showtimes"
-                    Layout.preferredWidth: buttonGrid.btnWidth
-                    Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("CurrentlyShowing.qml")
-                }
+                // Removed "Now Showing"
 
                 Button1 {
                     mainText: "Reservations"
@@ -190,9 +183,8 @@ Page {
                 }
             }
 
-            // Footer - CENTERED
             Text {
-                Layout.alignment: Qt.AlignHCenter  // ← Center the footer
+                Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
                 Layout.topMargin: 20
                 Layout.bottomMargin: 30
