@@ -11,6 +11,10 @@
         <file>src/UI/pages/Showtimes_page.qml</file>
         <file>src/UI/pages/Cinema_layout_page.qml</file>
         <file>src/UI/pages/Food_Orders_page.qml</file>
+        <file>src/UI/pages/Hall1.qml</file>
+        <file>src/UI/pages/Hall2.qml</file>
+        <file>src/UI/pages/Hall3.qml</file>
+        <file>src/UI/pages/Hall4.qml</file>
     </qresource>
     <qresource prefix="/sql">
         <file>sql_assets/users.sql</file>

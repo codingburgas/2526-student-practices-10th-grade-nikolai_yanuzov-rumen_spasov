@@ -4,7 +4,6 @@ import QtQuick.Layouts
 
 Page {
     id: cinemaLayout
-    signal hallSelected(string hallName)
 
     background: Rectangle { color: "#030619" }
 
@@ -25,10 +24,10 @@ Page {
         ListModel {
             id: hallModel
 
-            ListElement { hallName: "Hall 1"; seats: "120"; screenType: "IMAX Screen" }
-            ListElement { hallName: "Hall 2"; seats: "80";  screenType: "Dolby Atmos" }
-            ListElement { hallName: "Hall 3"; seats: "150"; screenType: "4DX Motion" }
-            ListElement { hallName: "Hall 4"; seats: "60";  screenType: "Classic Screen" }
+            ListElement { hallName: "Hall 1"; seats: "120"; screenType: "IMAX Screen"; fileName: "Hall1.qml" }
+            ListElement { hallName: "Hall 2"; seats: "80";  screenType: "Dolby Atmos"; fileName: "Hall2.qml" }
+            ListElement { hallName: "Hall 3"; seats: "150"; screenType: "4DX Motion"; fileName: "Hall3.qml" }
+            ListElement { hallName: "Hall 4"; seats: "60";  screenType: "Classic Screen"; fileName: "Hall4.qml" }
         }
 
         GridLayout {
@@ -38,7 +37,7 @@ Page {
             columnSpacing: 30
             Layout.alignment: Qt.AlignHCenter
 
-            // ---- REPEATER (NO MORE UNDEFINED!) ----
+            // ---- REPEATER ----
             Repeater {
                 model: hallModel
 
@@ -55,9 +54,14 @@ Page {
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
+
                         onEntered: parent.hovered = true
                         onExited: parent.hovered = false
-                        onClicked: cinemaLayout.hallSelected(model.hallName)
+
+                        // ---- OPEN THE CORRECT FILE ----
+                        onClicked: {
+                            stackView.push(model.fileName)
+                        }
                     }
 
                     // Hover effect (gray)

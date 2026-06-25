@@ -14,3 +14,9 @@ qt_add_library(Cinema_layout_UI STATIC
 qt_add_library(Food_Orders_UI STATIC
     Food_Orders_page.qml
 )
+qt_add_library(Halls_UI STATIC
+    Hall1.qml
+    Hall2.qml
+    Hall3.qml
+    Hall4.qml
+)
