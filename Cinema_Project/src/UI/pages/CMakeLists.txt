@@ -7,6 +7,8 @@ qt_add_library(About_Us_UI STATIC
 )
 qt_add_library(Showtimes_UI STATIC
     Showtimes_page.qml
+    AddNew.qml
+    Delete.qml
 )
 qt_add_library(Cinema_layout_UI STATIC
     Cinema_layout_page.qml

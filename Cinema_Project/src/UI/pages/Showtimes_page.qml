@@ -62,7 +62,7 @@ Page {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
-                onClicked: stackView.push("AddFilm.qml")
+                onClicked: stackView.push("AddNew.qml")
             }
 
             // Delete button
