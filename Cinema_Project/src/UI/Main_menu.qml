@@ -162,7 +162,7 @@ Page {
                     secondaryText: "View seating arrangement"
                     Layout.preferredWidth: buttonGrid.btnWidth
                     Layout.preferredHeight: buttonGrid.btnHeight
-                    onClicked: navigateTo("CinemaLayout.qml")
+                    onClicked: navigateTo("pages/Cinema_layout_page.qml")
                 }
 
                 Button1 {
