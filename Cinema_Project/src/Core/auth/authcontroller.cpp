@@ -17,16 +17,17 @@ AuthController::AuthController(QObject* parent):QObject(parent){
 void AuthController::login(const QString &email, const QString &password)
 {
     loginCon->validate(email, password);
+    setIsAdmin(loginCon->admin);
 }
 
-void AuthController::registerUser(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm)
+void AuthController::registerUser(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm, const bool admin)
 {
-    registeringCon->validate(username, email, password, passwordConfirm);
+    registeringCon->validate(username, email, password, passwordConfirm, admin);
 }
 
 
 void AuthController::LoadSql(){
-    QFile file(":/sql/sql_assets/users.sql");
+    QFile file(":sql_assets/users.sql");
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Cannot open SQL file:" << file.errorString();

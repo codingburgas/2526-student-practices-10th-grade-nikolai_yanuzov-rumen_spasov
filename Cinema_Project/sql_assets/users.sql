@@ -1,10 +1,10 @@
 
-
 CREATE TABLE IF NOT EXISTS "Users" (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "userName" TEXT DEFAULT 'unknown',
     "userEmail" TEXT NOT NULL,
-    "userPassword" TEXT NOT NULL
+    "userPassword" TEXT NOT NULL,
+    "admin" BOOLEAN NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS "email_index"

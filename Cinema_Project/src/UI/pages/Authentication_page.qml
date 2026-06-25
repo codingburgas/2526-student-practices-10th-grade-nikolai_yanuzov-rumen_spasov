@@ -18,7 +18,8 @@ Page {
                     registerForm.username,
                     registerForm.email,
                     registerForm.password,
-                    registerForm.confirmPassword
+                    registerForm.confirmPassword,
+                    registerForm.admin
                 )
             }
         }
@@ -452,6 +453,7 @@ Page {
         property string email: ""
         property string password: ""
         property string confirmPassword: ""
+        property bool admin: true
 
         property string usernamePlaceholder: "Enter username"
         property string emailPlaceholder: "your@email.com"
@@ -887,7 +889,8 @@ Page {
                                 registerForm.username,
                                 registerForm.email,
                                 registerForm.password,
-                                registerForm.confirmPassword
+                                registerForm.confirmPassword,
+                                registerForm.admin
                             )
                         }
                     }

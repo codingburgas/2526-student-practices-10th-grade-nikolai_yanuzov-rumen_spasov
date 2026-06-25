@@ -40,6 +40,51 @@ Page {
             Layout.fillWidth: true
         }
 
+        // ADMIN BUTTONS
+        RowLayout {
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 20
+            visible: auth.isAdmin
+
+            // Add New button
+            Button {
+                text: "Add New"
+                background: Rectangle {
+                    radius: 10
+                    color: "#1f2333"
+                    border.color: "#ffb6b6"
+                    border.width: 1
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: "#ffb6b6"
+                    font.pixelSize: 18
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: stackView.push("AddFilm.qml")
+            }
+
+            // Delete button
+            Button {
+                text: "Delete"
+                background: Rectangle {
+                    radius: 10
+                    color: "#1f2333"
+                    border.color: "#ffb6b6"
+                    border.width: 1
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: "#ffb6b6"
+                    font.pixelSize: 18
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: stackView.push("RemoveFilm.qml")
+            }
+        }
+
         // Scrollable area
         ScrollView {
             Layout.fillWidth: true
@@ -76,7 +121,7 @@ Page {
                         Column {
                             anchors.fill: parent
                             anchors.margins: 20
-                            spacing: 20 // space between title and time
+                            spacing: 20
 
                             Text {
                                 text: modelData.title

@@ -17,7 +17,8 @@ class RegisterController  : public QObject{
 public:
     explicit RegisterController(QObject *parent = nullptr);
 
-    void validate(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm);
+    void validate(const QString& username, const QString &email, const QString &password, const QString &passwordConfirm, const bool admin);
+    bool admin;
 signals:
     void registerError(QString usernameError, QString emailError, QString passError);
     void registerSuccess();

@@ -7,13 +7,14 @@ RegisterController::RegisterController(QObject *parent) : QObject(parent) {
 void RegisterController::validate(const QString& username,
                                   const QString& email,
                                   const QString& password,
-                                  const QString& passwordConfirm)
+                                  const QString& passwordConfirm,
+                                  const bool admin)
 {
+    this->admin = admin;
     // ===== ERROR FLAGS =====
     QString usernameError;
     QString emailError;
     QString passwordError;
-
     {
     QStringList existingUsernames;
 
@@ -88,14 +89,15 @@ void RegisterController::validate(const QString& username,
     {
         QSqlQuery userQuery;
         userQuery.prepare(
-            "INSERT INTO Users (userName, userEmail, userPassword) "
-            "VALUES (:name, :email, :password)"
+            "INSERT INTO Users (userName, userEmail, userPassword, admin) "
+            "VALUES (:name, :email, :password, :admin)"
             );
 
 
         userQuery.bindValue(":name", username);
         userQuery.bindValue(":email", email);
         userQuery.bindValue(":password", password);
+        userQuery.bindValue(":admin", admin);
 
 
         if (!userQuery.exec()) {

@@ -15,6 +15,7 @@ public:
     explicit LogerController(QObject *parent = nullptr);
 
     void validate(const QString &user, const QString &password);
+    bool admin;
 
 signals:
     void loginSuccess();
