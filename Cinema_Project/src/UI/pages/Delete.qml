@@ -6,6 +6,10 @@ Page {
     id: deleteFilmPage
     title: "Delete Film"
 
+    // 🔥 получаваме модела и stackView от Showtimes.qml
+    property var filmsModel
+    property var stackView
+
     Rectangle {
         anchors.fill: parent
         color: "#0b0e1a"
@@ -114,10 +118,46 @@ Page {
                 }
 
                 onClicked: {
-                    console.log("Deleting:",
-                                filmTitleField.text,
-                                showtimeField.text)
-                    stackView.pop()
+                    console.log("Trying to delete:", filmTitleField.text, showtimeField.text)
+
+                    // 🔥 Търсим филм по заглавие
+                    for (var i = 0; i < filmsModel.count; i++) {
+                        if (filmsModel.get(i).title === filmTitleField.text) {
+
+                            // Ако showtime е празно → трие целия филм
+                            if (showtimeField.text === "") {
+                                filmsModel.remove(i)
+                                console.log("✔ Film deleted:", filmTitleField.text)
+                                stackView.pop()
+                                return
+                            }
+
+                            // 🔥 Ако има showtime → трие само този час
+                            var times = filmsModel.get(i).time.split(", ")
+                            var index = times.indexOf(showtimeField.text)
+
+                            if (index !== -1) {
+                                times.splice(index, 1)
+
+                                if (times.length === 0) {
+                                    // Няма останали часове → трие целия филм
+                                    filmsModel.remove(i)
+                                } else {
+                                    // Обновяваме часовете
+                                    filmsModel.set(i, {
+                                        title: filmsModel.get(i).title,
+                                        time: times.join(", ")
+                                    })
+                                }
+
+                                console.log("✔ Showtime deleted:", showtimeField.text)
+                                stackView.pop()
+                                return
+                            }
+                        }
+                    }
+
+                    console.log("❌ Film or showtime not found")
                 }
             }
 

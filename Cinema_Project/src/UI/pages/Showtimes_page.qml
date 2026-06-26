@@ -100,7 +100,14 @@ Page {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
-                onClicked: stackView.push("Delete.qml")
+                onClicked: stackView.push(
+                    Qt.resolvedUrl("Delete.qml"),
+                    {
+                        filmsModel: filmsModel,
+                        stackView: stackView
+                    }
+                )
+
             }
         }
 
