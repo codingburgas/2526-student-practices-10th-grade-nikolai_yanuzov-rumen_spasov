@@ -5,7 +5,22 @@ import QtQuick.Layouts 1.15
 Page {
     id: showtimesPage
     title: "Showtimes"
+    ListModel {
+        id: filmsModel
 
+    }
+    Component.onCompleted: {
+        filmsModel.append({ title: "Inside Out 2", time: "14:00, 17:30, 20:00" })
+        filmsModel.append({ title: "Bad Boys: Ride or Die", time: "15:00, 18:30, 21:00" })
+        filmsModel.append({ title: "Despicable Me 4", time: "13:30, 16:00, 19:30" })
+        filmsModel.append({ title: "Deadpool & Wolverine", time: "12:00, 15:00, 18:00, 21:00" })
+        filmsModel.append({ title: "Kung Fu Panda 4", time: "11:30, 14:00, 17:00" })
+        filmsModel.append({ title: "The Garfield Movie", time: "10:00, 12:30, 15:00" })
+        filmsModel.append({ title: "Dune: Part Two", time: "16:00, 19:30, 22:00" })
+        filmsModel.append({ title: "Avatar: The Way of Water", time: "13:00, 17:00, 20:30" })
+        filmsModel.append({ title: "The Batman", time: "15:30, 19:00, 22:30" })
+        filmsModel.append({ title: "Oppenheimer", time: "14:00, 18:00, 21:30" })
+    }
     Rectangle {
         anchors.fill: parent
         color: "#0b0e1a" // dark navy background
@@ -62,7 +77,11 @@ Page {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                 }
-                onClicked: stackView.push("AddNew.qml")
+                onClicked: stackView.push(Qt.resolvedUrl("AddNew.qml"), {
+                    filmsModel: filmsModel,
+                    stackView: stackView
+                })
+
             }
 
             // Delete button
@@ -96,18 +115,7 @@ Page {
                 spacing: 20
 
                 Repeater {
-                    model: [
-                        { title: "Inside Out 2", time: "14:00, 17:30, 20:00" },
-                        { title: "Bad Boys: Ride or Die", time: "15:00, 18:30, 21:00" },
-                        { title: "Despicable Me 4", time: "13:30, 16:00, 19:30" },
-                        { title: "Deadpool & Wolverine", time: "12:00, 15:00, 18:00, 21:00" },
-                        { title: "Kung Fu Panda 4", time: "11:30, 14:00, 17:00" },
-                        { title: "The Garfield Movie", time: "10:00, 12:30, 15:00" },
-                        { title: "Dune: Part Two", time: "16:00, 19:30, 22:00" },
-                        { title: "Avatar: The Way of Water", time: "13:00, 17:00, 20:30" },
-                        { title: "The Batman", time: "15:30, 19:00, 22:30" },
-                        { title: "Oppenheimer", time: "14:00, 18:00, 21:30" }
-                    ]
+                    model: filmsModel;
 
                     delegate: Rectangle {
                         width: parent.width
@@ -124,14 +132,14 @@ Page {
                             spacing: 20
 
                             Text {
-                                text: modelData.title
+                                text: title
                                 font.pixelSize: 26
                                 font.bold: true
                                 color: "#ffb6b6"
                             }
 
                             Text {
-                                text: "Showtimes: " + modelData.time
+                                text: "Showtimes: " + time
                                 font.pixelSize: 18
                                 color: "#d0d0d0"
                             }

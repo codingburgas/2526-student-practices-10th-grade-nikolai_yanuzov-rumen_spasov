@@ -6,6 +6,11 @@ Page {
     id: addFilmPage
     title: "Add New Film"
 
+    // 🔥 получаваме модела от Showtimes.qml
+    property var filmsModel
+    property var stackView
+
+
     Rectangle {
         anchors.fill: parent
         color: "#0b0e1a"
@@ -16,7 +21,6 @@ Page {
         anchors.margins: 40
         spacing: 30
 
-        // HEADER
         Text {
             text: "Add New Film"
             font.pixelSize: 36
@@ -31,171 +35,67 @@ Page {
             Layout.fillWidth: true
         }
 
-        // FORM CONTAINER
         ColumnLayout {
             spacing: 20
             Layout.fillWidth: true
 
-            // FILM NAME
-            ColumnLayout {
-                spacing: 6
+            TextField {
+                id: filmNameField
+                placeholderText: "Film name"
                 Layout.fillWidth: true
-
-                Text {
-                    text: "Film Name"
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                }
-
-                TextField {
-                    id: filmNameField
-                    placeholderText: "Enter film name"
-                    font.pixelSize: 18
-                    color: "#ffffff"
-                    Layout.fillWidth: true
-
-                    background: Rectangle {
-                        radius: 10
-                        color: "#141827"
-                        border.color: "#ffb6b6"
-                        border.width: 1
-                    }
-                }
             }
 
-            // SHOWTIMES
-            ColumnLayout {
-                spacing: 6
+            TextArea {
+                id: showtimesField
+                placeholderText: "14:00, 17:30, 20:00"
                 Layout.fillWidth: true
-
-                Text {
-                    text: "Showtimes"
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                }
-
-                TextArea {
-                    id: showtimesField
-                    placeholderText: "Example: 14:00, 17:30, 20:00"
-                    font.pixelSize: 18
-                    color: "#ffffff"
-                    wrapMode: TextEdit.Wrap
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 100
-
-                    background: Rectangle {
-                        radius: 10
-                        color: "#141827"
-                        border.color: "#ffb6b6"
-                        border.width: 1
-                    }
-                }
+                Layout.preferredHeight: 100
             }
 
-            // HALL
-            ColumnLayout {
-                spacing: 6
+            ComboBox {
+                id: hallBox
+                model: ["Hall 1", "Hall 2", "Hall 3", "Hall 4"]
                 Layout.fillWidth: true
-
-                Text {
-                    text: "Hall"
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                }
-
-                ComboBox {
-                    id: hallBox
-                    model: ["Hall 1", "Hall 2", "Hall 3", "Hall 4"]
-                    font.pixelSize: 18
-                    Layout.fillWidth: true
-
-                    background: Rectangle {
-                        radius: 10
-                        color: "#141827"
-                        border.color: "#ffb6b6"
-                        border.width: 1
-                    }
-                }
             }
 
-            // LENGTH
-            ColumnLayout {
-                spacing: 6
+            TextField {
+                id: lengthField
+                placeholderText: "Length (minutes)"
+                inputMethodHints: Qt.ImhDigitsOnly
                 Layout.fillWidth: true
-
-                Text {
-                    text: "Film Length (minutes)"
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                }
-
-                TextField {
-                    id: lengthField
-                    placeholderText: "Example: 120"
-                    font.pixelSize: 18
-                    color: "#ffffff"
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    Layout.fillWidth: true
-
-                    background: Rectangle {
-                        radius: 10
-                        color: "#141827"
-                        border.color: "#ffb6b6"
-                        border.width: 1
-                    }
-                }
             }
         }
 
-        // BUTTONS
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
             spacing: 20
 
-            // SAVE BUTTON
             Button {
                 text: "Save"
-                background: Rectangle {
-                    radius: 10
-                    color: "#1f2333"
-                    border.color: "#ffb6b6"
-                    border.width: 1
-                }
-                contentItem: Text {
-                    text: parent.text
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-
                 onClicked: {
-                    console.log("Film added:",
-                                filmNameField.text,
-                                showtimesField.text,
-                                hallBox.currentText,
-                                lengthField.text)
-                    stackView.pop()
+                    if (filmNameField.text === "" ||
+                        showtimesField.text === "" ||
+                        hallBox.currentIndex === -1 ||
+                        lengthField.text === "") {
+
+                        console.log("❌ All fields must be filled!")
+                        return
+                    }
+
+                    // 🔥 добавяме филм в модела
+                    filmsModel.append({
+                        "title": filmNameField.text,
+                        "time": showtimesField.text
+                    })
+
+                    console.log("✔ Film added:", filmNameField.text)
+
+                    stackView.pop()   // 🔥 връщаме се към Showtimes.qml
                 }
             }
 
-            // CANCEL BUTTON
             Button {
                 text: "Cancel"
-                background: Rectangle {
-                    radius: 10
-                    color: "#1f2333"
-                    border.color: "#ffb6b6"
-                    border.width: 1
-                }
-                contentItem: Text {
-                    text: parent.text
-                    color: "#ffb6b6"
-                    font.pixelSize: 18
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-
                 onClicked: stackView.pop()
             }
         }
